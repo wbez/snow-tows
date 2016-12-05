@@ -54,3 +54,6 @@ www/live-data/*
 
 #Logs
 logs/*.log
+
+#Notes
+*.notes

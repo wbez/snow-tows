@@ -13,7 +13,7 @@ from slimit import minify
 from smartypants import smartypants
 
 import app_config
-import copytext
+import copytext, copydoc
 
 logging.basicConfig(format=app_config.LOG_FORMAT)
 logger = logging.getLogger(__name__)
@@ -187,6 +187,57 @@ def make_context(asset_depth=0):
         context['COPY'] = copytext.Copy(app_config.COPY_PATH)
     except copytext.CopyException:
         pass
+
+    with open(app_config.DOC_PATH) as f:
+        html = f.read()
+
+    tokens = (
+      ('TITLE', 'title'),
+      ('TEASER', 'teaser'),
+      ('BYLINE', 'byline'),
+      ('SUBHED', 'subhed'),
+    )
+
+    doc = copydoc.CopyDoc(html,tokens)
+    context['DOC'] = doc
+    soup = doc.soup
+
+    dict_template = {'template':'main','text':'','class':''}
+
+    for tag in soup.findAll('p'):
+        if tag.text.startswith('TEXT:'):
+            
+            for sib in tag.next_siblings:
+                dict_copy = dict_template.copy()
+                if sib.text == "-30-":
+                    break
+                elif (sib.text.startswith('<iframe')) | (sib.text.startswith('<p data')) | (sib.text.startswith('<hr')) | (sib.text.startswith('<img')):
+                    doc.text += sib.text
+                    dict_copy['text'] = sib.text
+                    dict_copy['class'] = 'col-sm-10 col-sm-offset-1'
+                    doc.text_list.append(dict_copy)
+                elif (sib.text.startswith('DOCUMENT:')):
+                    t = sib.text.replace('DOCUMENT: ','')
+                    
+                    if 'Plan' in sib.a.text:
+                        i = 'document'
+                    else:
+                        i = 'contract'
+                    s = '<p class="document image"><a href="%s" >%s<br><img class="img-rounded" src="https://s3.amazonaws.com/wbez-assets/WBEZ-Graphics/snow-tows/%s.jpg" /></a></p>' % (sib.a['href'][0], sib.a.text,i)
+                    dict_copy['text'] = s
+                    # self.text_list[-1]['text']+=s
+                    # self.text_list[-1]['class'] += 'col-sm-8 col-sm-offset-2 document'
+                    doc.text_list.append(dict_copy)
+                elif (sib.text.startswith('CAPTION:')):
+                    t = unicode(sib)
+                    t = t.replace('CAPTION: ','')
+                    dict_copy['text'] = t
+                    dict_copy['class'] = 'col-sm-8 col-sm-offset-2 caption'
+                    doc.text_list.append(dict_copy)
+                else:
+                    doc.text += unicode(sib)
+                    dict_copy['text'] = unicode(sib)
+                    doc.text_list.append(dict_copy)
 
     context['JS'] = JavascriptIncluder(asset_depth=asset_depth)
     context['CSS'] = CSSIncluder(asset_depth=asset_depth)

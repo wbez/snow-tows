@@ -9,6 +9,8 @@ from functools import wraps
 from render_utils import make_context
 
 SPREADSHEET_URL_TEMPLATE = 'https://docs.google.com/feeds/download/spreadsheets/Export?exportFormat=xlsx&key=%s'
+# SPREADSHEET_URL_TEMPLATE = 'https://www.googleapis.com/drive/v3/%s/fileId/export?mimetype=html'
+DOC_URL_TEMPLATE = 'https://www.googleapis.com/drive/v3/files/%s/export?mimeType=text%%2Fhtml'
 
 oauth = Blueprint('_oauth', __name__)
 
@@ -99,13 +101,21 @@ def save_credentials(credentials):
     with open(file_path, 'w') as f:
         f.write(credentials.serialize())
 
-def get_document(key, file_path):
+def get_document(key, file_path, template_type):
     """
     Uses Authomatic to get the google doc
     """
     credentials = get_credentials()
-    url = SPREADSHEET_URL_TEMPLATE % key
+
+    if template_type == 'spreadsheet':
+        TEMPLATE = SPREADSHEET_URL_TEMPLATE
+    else:
+        TEMPLATE = DOC_URL_TEMPLATE
+
+    url = TEMPLATE % key
     response = app_config.authomatic.access(credentials, url)
+
+    print url
 
     if response.status != 200:
         if response.status == 404:

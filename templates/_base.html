@@ -7,18 +7,21 @@
         var _sf_startpt=(new Date()).getTime();
     </script>
 
-    <title>{{ COPY.content.project_name }}</title>
+    <title>{{ COPY.content.headline }}</title>
 
     <!-- META TAGS -->
     {% include '_meta.html' %}
 
     <!-- FONTS -->
     {% include '_fonts.html' %}
-
     <!-- CSS -->
     {{ CSS.push('less/app.less') }}
+    {{ CSS.push('less/snowtows.less') }}
     {% block extra_css %}{% endblock extra_css %}
     {{ CSS.render('css/rendered/app.min.css') }}
+    <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+
 
     {% include '_social_tags.html' %}
 
@@ -55,7 +58,8 @@
         </svg>
       </a>
   
-        <ul class="site-links">
+        <ul class="social-links">
+            <li class="donate"><a href="https://donate.chicagopublicmedia.org/give/wbez/"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
             <li class="twitter"><a rel="external" href="http://twitter.com/share?text={{ COPY.share.twitter_text|urlencode }}&amp;url={{ COPY.share.share_url|urlencode }}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', '{{ PROJECT_SLUG }}', 'tweet', 'nav']);"><i class="fa fa-twitter"></i></a></li>
             <li class="facebook"><a rel="external" href="https://www.facebook.com/sharer/sharer.php?u={{COPY.share.share_url}}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', '{{ PROJECT_SLUG }}', 'facebook', 'nav']);"><i class="fa fa-facebook"></i></a></li>
         </ul>
@@ -70,7 +74,7 @@
     {% endblock content %}
 
     {% block footer %}
-    <footer>
+        <footer>
         <div class="primary">
             <ul>
 
@@ -80,8 +84,6 @@
             <p>&copy;2016 WBEZ</p>
             <ul>
                 <li id="footerContact"><a href="http://www.wbez.org/contact">Contact</a></li>
-                <li id="footerContact"><a href="https://www.chicagopublicmedia.org/page/privacy-policy">Privacy Policy</a></li>
-                <li id="footerContact"><a href="https://www.chicagopublicmedia.org/give/support-wbez-0">Donate</a></li>
             </ul>
         </div>
     </footer>
@@ -90,6 +92,7 @@
     {{ JS.push('js/lib/jquery.js') }}
     {{ JS.push('js/lib/underscore.js') }}
     {{ JS.push('js/lib/moment.js') }}
+    {{ JS.push('js/lib/pym.js') }}
 
     {# uncomment both files to use simpleStorage #}
     {# {{ JS.push('js/lib/simpleStorage.js') }} #}
@@ -105,6 +108,7 @@
     {% block extra_foot_js %}{% endblock extra_foot_js %}
     {{ JS.render('js/app-footer.min.js') }}
 
+
     {% block extra_foot %}
     {% endblock extra_foot %}
 
@@ -112,5 +116,6 @@
     <script type="text/javascript">
         $(ANALYTICS.setupChartbeat);
     </script>
+
 </body>
 </html>

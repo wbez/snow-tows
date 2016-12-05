@@ -1,0 +1,156 @@
+body {
+	color: #333;
+	font-family:'Source Sans Pro', sans-serif;
+	overflow-x: hidden;
+}
+
+.header {
+	&:before {
+		content: ' ';
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100vh;
+		z-index: 0;
+		opacity: 1;
+		background-color: #fff;
+		background-image: url("https://s3.amazonaws.com/wbez-assets/WBEZ-Graphics/snow-tows/snowtowthumb.png");
+		background-size:100%;
+		background-repeat: no-repeat;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background-position: center top;
+	}
+
+	color:#333;
+	text-shadow: 1px 1px #e9e9e9;
+	padding:0px;
+	margin:0px;
+
+	height:100vh;
+
+	.header-text {
+		position: absolute;
+	    bottom: 10%;
+	    left: 0; 
+		right: 0; 
+		margin-left: auto; 
+		margin-right: auto; 
+		width:80%;
+		padding: 5px 15px;
+		background-color:rgba(255,255,255,0.75);
+		border-radius: 5px;
+	}
+
+	.photo-credit {
+		position: absolute;
+	    bottom: 10%;
+	    left: 0; 
+		right: 0; 
+		margin-left: auto; 
+		margin-right: auto; 
+		width:80%;
+	}
+
+	h1 {
+		font-size: 3em;	
+		text-shadow: 2px 2px #e9e9e9;	
+		font-family:"CharterITCStd-Bold","Georgia",serif;
+	}
+
+	.subhed {
+		font-size: 1em;
+		text-shadow: 2px 2px 1px #000;
+	}
+
+	.byline {
+		font-size: 16px;
+		text-shadow: 1px 1px #e1e1e1;
+	}
+
+}
+
+nav {
+	border-bottom: none;
+	position:fixed;
+	z-index: 99;
+	width:100%;
+}
+
+p {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.image {
+	padding:0;
+}
+
+.caption {
+	font-size: 14px;
+	font-style: italic;
+}
+
+.document {
+
+		// display: inline;
+	 //    width: 50%;
+	 //    float: right;
+
+	    &.image {
+	    	// float:left;
+	    	font-size: 14px;
+			text-transform: uppercase;
+			border-radius: 5px;
+			font-weight: 700;
+			background: #f5f5f5;
+			border: 1px solid #e5e5e5;
+			padding: 10px 10px;
+			// width:45%;
+			margin-right: 10px;
+	    }
+		
+		img {
+			width: 100%;
+		}
+	
+}
+
+h3 {
+	font-family:"CharterITCStd-Bold","Georgia",serif;
+}
+
+.form-group {
+	margin-top: 25px;
+}
+
+.source {
+	margin: 20px 0px;
+	font-style: italic;
+	font-size: 12px;
+}
+
+.plow-container {
+	margin-top: 15px;
+}
+
+.snowplow {
+	width: 8em;
+}
+
+@media (min-width: 768px) {
+	.subhed {
+		font-size: 2em;
+	}
+
+	h1 {
+		font-size: 4em;
+	}
+
+}
+
+@media (max-width: 320px) {
+}

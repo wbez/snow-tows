@@ -94,13 +94,15 @@ DEBUG = True
 """
 COPY EDITING
 """
-COPY_GOOGLE_DOC_KEY = '1sFqiNM4CQsPCv1pvCgwB280iC5-CP2_Ex1Nkyx1xXNk'
+COPY_GOOGLE_SPREADSHEET_KEY = '1sFqiNM4CQsPCv1pvCgwB280iC5-CP2_Ex1Nkyx1xXNk'
+COPY_GOOGLE_DOC_KEY = '1x-xQuffKj99CD8WOaqbTknGFBoP6CVJ6jlKyvULrCWE'
 COPY_PATH = 'data/copy.xlsx'
+DOC_PATH = 'data/copy.html'
 
 """
 SHARING
 """
-SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKET, PROJECT_SLUG)
+SHARE_URL = 'http://interactive.wbez.org/towing-the-line/'
 
 """
 SERVICES

@@ -29,4 +29,5 @@ def update():
         print logger.warn('Run `fab app` and visit `http://localhost:8000` to generate credentials.')
         return
 
-    get_document(app_config.COPY_GOOGLE_DOC_KEY, app_config.COPY_PATH)
+    get_document(app_config.COPY_GOOGLE_SPREADSHEET_KEY, app_config.COPY_PATH,'spreadsheet')
+    get_document(app_config.COPY_GOOGLE_DOC_KEY, app_config.DOC_PATH,'document')
